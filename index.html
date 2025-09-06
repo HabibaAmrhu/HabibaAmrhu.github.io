@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habiba Amr - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #2563eb;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.2s forwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            color: white;
+            border-color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1f2937;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8fafc;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image .placeholder {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #6b7280;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: #2563eb;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .project-content p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-links a {
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            color: #374151;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-links a:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .project-links a.disabled {
+            background: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .project-links a.disabled:hover {
+            background: #e5e7eb;
+            color: #9ca3af;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .blog-content {
+            margin-top: 2rem;
+        }
+
+        .blog-content h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content h4 {
+            color: #374151;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .blog-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #1f2937;
+            color: white;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background: #1d4ed8;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .about-image .placeholder {
+                width: 200px;
+                height: 200px;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                padding: 1.5rem;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Habiba</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#rise">Rise Internship</a></li>
+                <li><a href="#entrepreneurship">Entrepreneurship</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Habiba Amr</h1>
+            <p class="subtitle">Full Stack Developer & AI Enthusiast</p>
+            <p class="description">Passionate about creating digital solutions with .NET, Python, Robotics, and AI projects. Awarded multiple scholarships for programming & entrepreneurship.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="placeholder">Profile Photo</div>
+                </div>
+                <div class="about-text">
+                    <p>Hello! I'm a passionate full-stack developer with experience creating digital solutions that make a difference. I love turning complex problems into simple, beautiful, and intuitive designs.</p>
+                    <p>When I'm not coding, you'll find me exploring new technologies, contributing to open source projects, or sharing knowledge with the developer community.</p>
+                    <div class="skills">
+                        <span class="skill-tag">.NET</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">ASP.NET MVC</span>
+                        <span class="skill-tag">HTML & CSS</span>
+                        <span class="skill-tag">AI & ML</span>
+                        <span class="skill-tag">Robotics</span>
+                        <span class="skill-tag">Git & GitHub</span>
+                         
+                        <span class="skill-tag" style="background:#04213b;">Entrepreneurship</span>
+    <span class="skill-tag" style="background:#04213b;">Leadership</span>
+    <span class="skill-tag" style="background:#04213b;">Project Management</span>
+    <span class="skill-tag" style="background:#04213b;">Marketing Strategy</span>
+    <span class="skill-tag" style="background:#04213b;">Innovation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rise Section -->
+    <section id="rise">
+        <div class="container">
+            <h2>Rise Internship Highlights</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">AI in Healthcare</div>
+                    <div class="project-content">
+                        <h3>How AI Could Help Treat Amblyopia in Adults</h3>
+                        <p>Researched and wrote a comprehensive blog on AI-powered therapies for adult amblyopia. My video presentation was among the top submissions.</p>
+                        <div class="project-links">
+                            <a href="#" onclick="openBlogModal()">Read Blog</a>
+                            <a href="https://youtube.com/shorts/ia5Xa1JusaI?si=-IKI54ItfoLRJklf" target="_blank">Video Presentation</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">Student Survey Insights</div>
+                    <div class="project-content">
+                        <h3>Survey Analysis & Insights</h3>
+                        <p>Designed and analyzed surveys from 20+ participants, providing actionable insights for campaign planning.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">Marketing Campaign Proposal</div>
+                    <div class="project-content">
+                        <h3>Explore with RISE Campaign</h3>
+                        <p>Proposed an Instagram campaign with interactive content to engage Gen Z audiences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entrepreneurship -->
+    <section id="entrepreneurship">
+        <div class="container">
+            <h2>Entrepreneurship & Innovation</h2>
+            <div class="projects-grid">
+              
+                <div class="project-card">
+                    <div class="project-image">Hackathons & Competitions</div>
+                    <div class="project-content">
+                        <h3>ISEF 2023, Gen Zeurs Hackathon, UpStart League</h3>
+                        <p>Participated as a leader and presenter. Gained awards and recognition for innovative projects.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">Volunteering & Leadership</div>
+                    <div class="project-content">
+                        <h3>Nile University</h3>
+                        <p>Volunteered as a team leader in multiple programs, developing leadership, presentation, and organizational skills.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">Signature Verification AI</div>
+                    <div class="project-content">
+                        <h3>Signature Verification AI</h3>
+                        <p>An AI system to verify handwritten signatures using ML models built with Python. Participated in ISEF 2023 and advanced to governorate level.</p>
+                        <div class="project-links">
+                            <a href="https://signature-verification-ai.streamlit.app/" target="_blank">Live Demo</a>
+                            <a href="https://github.com/HabibaAmrhu/SignatureVerification" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">Task Manager App</div>
+                    <div class="project-content">
+                        <h3>Collaborative Task Manager</h3>
+                        <p>WPF (Windows Presentation Foundation) and Entity Framework. This project allows users to efficiently manage tasks by adding, editing, deleting, and assigning statuses. It features role-based access for managers and employees, providing a smooth workflow for task delegation and tracking.
+
+Key Features:
+✔ Role-based access (Manager & Employee)
+✔ Create, update, delete, and assign tasks
+✔ Change and track task statuses dynamically
+✔ Interactive UI with a user-friendly experience </p>
+                        <div class="project-links">
+                          
+                            <a href="https://github.com/HabibaAmrhu/Task-Managment-Application" class="social-links">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">Earthquake Predection</div>
+                    <div class="project-content">
+                        <h3>Earthquake Predection</h3>
+                        <p>In the past, earthquake monitoring at agencies and institutions has generally relied on signal processing algorithms such as STA/LTA (Short-Term Average/Long-Term Average) and/or template matching/cross-correlation to detect earthquakes.</p>
+                        <div class="project-links">
+                            <a href="#" class="disabled">Coming Soon</a>
+                            <a href="#" class="disabled">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Modal -->
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>How AI Could Help Treat Amblyopia in Adults</h2>
+            <div class="blog-content">
+                <h3>1. Introduction: A Personal Story That Opened My Eyes</h3>
+                <p>Growing up, I had a secret I didn't talk about much: one of my eyes just didn't work like the other. I'd cover my strong eye and everything would go blurry. People called it "lazy eye," like it was no big deal. But to me, it was a big deal — especially as I got older and realized it wasn't going away.</p>
+                
+                <p>What made it more personal is that I'm not the only one in my family. My mom has amblyopia too, and so does my brother. It's not something we talk about often, but it's always been there — in the way we hold our heads a certain way, or avoid certain sports, or quietly squint through life.</p>
+                
+                <p>What frustrated me most was being told there's nothing to be done after childhood. That if you miss the "magic window" before age 12, it's game over. But is that really true?</p>
+                
+                <p>That question stayed with me. And with all the breakthroughs happening in artificial intelligence — from cancer diagnostics to self-driving cars — I began to wonder: Could AI help treat amblyopia in adults, too?</p>
+
+                <h3>2. What Is Amblyopia — and Why Is It So Hard to Treat Later in Life?</h3>
+                <p>Amblyopia, or lazy eye, is a vision problem where one eye doesn't fully develop because the brain starts ignoring it. It's not an issue with the eye itself — it's about how the brain processes what that eye sees. Over time, the connection between the eye and brain weakens, and vision in that eye stays blurry or underdeveloped.</p>
+                
+                <p>There are different types:</p>
+                <ul>
+                    <li><strong>Strabismic amblyopia:</strong> when the eyes are misaligned (like a squint or crossed eyes)</li>
+                    <li><strong>Refractive amblyopia:</strong> when there's a large difference in prescription between the two eyes</li>
+                    <li><strong>Deprivation amblyopia:</strong> when something blocks vision during development, like a cataract</li>
+                </ul>
+                
+                <p>This condition affects around 100 million people worldwide — that's more than the entire population of Germany!</p>
+
+                <h3>3. A New Way of Thinking: The Brain Can Still Learn</h3>
+                <p>For decades, amblyopia was seen as a one-eye issue. The solution? Cover the stronger eye and force the weak one to "step up." But new research shows the problem is more complex — and more hopeful.</p>
+                
+                <p>We now understand that amblyopia is actually a binocular problem — it's about how the eyes work together. The brain isn't broken; it's just developed an imbalance between the two visual signals. And here's the good news: neuroplasticity doesn't disappear completely in adulthood.</p>
+
+                <h3>4. Smarter Diagnoses: How AI Is Already Making an Impact</h3>
+                <p>AI is already changing how we diagnose diseases — from spotting tumors to predicting heart attacks. And now, it's entering the field of eye health too.</p>
+                
+                <p>Recent studies show that machine learning models — like Random Forests and Gradient Boosting — can detect amblyopia in adults with accuracy rates of 81% to 88%. These systems analyze data like eye-tracking, patient history, and even retinal scans to spot patterns that might be missed by the human eye.</p>
+                
+                <p>Even more advanced tools, like deep learning algorithms, can go further. Using models like LSTM networks and Transformer-based systems, researchers have managed to estimate the severity of amblyopia with impressive precision — achieving ROC-AUC scores as high as 0.89 for more severe cases.</p>
+
+                <h3>5. AI in Therapy: Digital Tools That Could Change Lives</h3>
+                
+                <h4>Gamified Therapy and "Digital Pills"</h4>
+                <p>Imagine putting on a VR headset and playing a video game — and actually improving your vision while doing it. That's what some companies are developing: games that send slightly different images to each eye, forcing your brain to sync them and "wake up" the lazy eye.</p>
+                
+                <h4>Perceptual Learning in Virtual Reality</h4>
+                <p>Another approach involves training the brain to see better — literally. Using VR exercises, AI-guided platforms help patients improve contrast sensitivity, depth perception, and other visual skills. These methods have been shown to improve visual acuity in adults over time.</p>
+                
+                <h4>Non-Invasive Brain Stimulation</h4>
+                <p>Some researchers are exploring tDCS (transcranial direct current stimulation) — a method that gently stimulates areas of the brain with small electrical currents. When combined with AI to time the stimulation properly, early studies suggest it could help the brain respond better to therapy.</p>
+
+                <h3>6. What Still Stands in the Way — and Where We're Headed</h3>
+                <p>Let's be real: this isn't a magic fix. There are still big challenges we need to solve:</p>
+                <ul>
+                    <li><strong>Relapse is common:</strong> Up to 24% of adults may lose their visual gains within a year of stopping therapy</li>
+                    <li><strong>Data is limited:</strong> AI models need massive, diverse datasets to stay accurate — and we're not quite there yet</li>
+                    <li><strong>Access isn't equal:</strong> Many tools require expensive headsets or strong internet, which isn't realistic for everyone</li>
+                    <li><strong>We still need doctors:</strong> AI can support care, but it's not a replacement for optometrists, neurologists, or ophthalmologists</li>
+                </ul>
+                
+                <p>Still, the future is bright. What's coming next?</p>
+                <ul>
+                    <li>Vision training apps you can use at home</li>
+                    <li>Wearable eye-tracking devices for real-time feedback</li>
+                    <li>AI models that adapt your treatment to your unique brain response</li>
+                </ul>
+
+                <h3>Conclusion: A New Vision for the Future — and My Role in It</h3>
+                <p>This journey started with a personal frustration. But now, I see it differently. Amblyopia in adults isn't hopeless. It's just a problem waiting for smarter tools — and braver minds — to solve it.</p>
+                
+                <p>Artificial intelligence is helping us reimagine what's possible in healthcare. It's giving us ways to see again — not just with our eyes, but with new perspectives.</p>
+                
+                <p>Through RISE, I've realized that I don't just want to live with this condition — I want to work on the solution.</p>
+                
+                <p>Not just for me. For everyone who's ever been told, "It's too late."</p>
+                
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb; font-size: 0.9rem; color: #6b7280;">
+                    <h4>References:</h4>
+                    <ul style="font-size: 0.85rem;">
+                        <li>Fertonani, A., Pirulli, C., & Miniussi, C. (2022). Transcranial electrical stimulation and visual perception. <em>Brain Stimulation</em>, 15(1), 134–145.</li>
+                        <li>Holmes, J. M., et al. (2012). Effect of age on response to amblyopia treatment in children. <em>Archives of Ophthalmology</em>, 130(5), 600–605.</li>
+                        <li>Levi, D. M., & Li, R. W. (2009). Perceptual learning as a potential treatment for amblyopia: A mini-review. <em>Vision Research</em>, 49(21), 2535–2549.</li>
+                        <li>Li, X., Zhang, C., & Wang, Z. (2022). Machine learning-assisted diagnosis of adult amblyopia using eye tracking data. <em>Journal of Vision Science and AI</em>, 13(3), 118–126.</li>
+                        <li>Wang, Y., Zhou, T., & Fang, F. (2021). Deep learning models for amblyopia severity classification. <em>Neural Computation in Medicine</em>, 9(4), 201–214.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's work together</h3>
+                    <p>I'm always interested in hearing about new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+                    
+                    <div class="contact-methods">
+                        <a href="mailto:habibaamr360@gmail.com" class="contact-method">
+                            <span>📧</span>
+                            <span>habibaamr360@gmail.com</span>
+                        </a>
+                        
+                        <a href="https://www.linkedin.com/in/habiba360" target="_blank" class="contact-method">
+                            <span>💼</span>
+                            <span>LinkedIn Profile</span>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/HabibaAmrhu" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/habiba360" target="_blank">LinkedIn</a>
+                <a href="https://www.youtube.com/@habibaamr360" target="_blank">YouTube</a>
+            </div>
+            <p>&copy; 2025 Habiba Amr. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-menu').classList.remove('active');
+            });
+        });
+
+        // Blog modal functionality
+        function openBlogModal() {
+            document.getElementById('blogModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('blogModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('blogModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            this.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
